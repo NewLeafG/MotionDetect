@@ -68,11 +68,18 @@ JNIEXPORT jstring JNICALL Java_com_muse_motiondetect_MainActivity_hello
 /*
  * Class:     com_muse_motiondetect_MainActivity
  * Method:    FindMoving
- * Signature: (JJ)D
- * Warning: This method may be return a NULL value.
+ * Signature: (JJ)[D
  */
 JNIEXPORT jdoubleArray JNICALL Java_com_muse_motiondetect_MainActivity_FindMoving
   (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_muse_motiondetect_MainActivity
+ * Method:    SetColor
+ * Signature: (J[D)V
+ */
+JNIEXPORT void JNICALL Java_com_muse_motiondetect_MainActivity_SetColor
+  (JNIEnv *, jobject, jlong, jdoubleArray);
 
 #ifdef __cplusplus
 }
