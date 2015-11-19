@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\Users\Muse\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="H:\Android\MotionDetect\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-02d44cc385a3aee293337ee70cfb987f1751c3b7.jar" />
+    </item>
+    <item
+        jar="H:\Android\MotionDetect\app\build\intermediates\exploded-aar\MotionDetect\openCVLibrary300\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a1d8647f2d41a14502b32956b6257f10efc86910">
+        <dex dex="H:\Android\MotionDetect\app\build\intermediates\pre-dexed\debug\classes-968d9fcd82543568abf4c4e8fcf17a6a4790e3ce.jar" />
+    </item>
+    <item
+        jar="H:\Android\MotionDetect\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="H:\Android\MotionDetect\app\build\intermediates\pre-dexed\debug\classes-090a6579b23ba6037291bc56d37fef047c7bc98c.jar" />
+    </item>
+    <item
+        jar="H:\Android\MotionDetect\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="H:\Android\MotionDetect\app\build\intermediates\pre-dexed\debug\classes-2e68afbd36eb0a07e15f31107e412565d07841ec.jar" />
+    </item>
+    <item
+        jar="H:\Android\MotionDetect\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="H:\Android\MotionDetect\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-7a6bd58a9d523e407a73293801117aea96221e6d.jar" />
+    </item>
+
+</items>
