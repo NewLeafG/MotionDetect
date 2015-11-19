@@ -198,6 +198,10 @@ JNIEXPORT jdoubleArray JNICALL Java_com_muse_motiondetect_MainActivity_FindMovin
     return rlt;
 }
 
+JNIEXPORT void JNICALL Java_com_muse_motiondetect_MainActivity_SetColor
+        (JNIEnv *, jobject, jlong, jdoubleArray){
+    // TODO set color to detect
+}
 
 }
 

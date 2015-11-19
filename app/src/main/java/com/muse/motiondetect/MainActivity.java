@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SubMenu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -37,7 +39,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     private CamView mOpenCvCameraView;
 
     public native double[] FindMoving(long matAddrGr, long matAddrRgba);
-
+    public native void SetColor(long matAddrRgba, double[] coordinate);
 
     public MainActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -55,6 +57,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView = (CamView) findViewById(R.id.cv_surface_view);
         mOpenCvCameraView.enableView();
         mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                double[] coordinate = {4.2,5.3};
+                SetColor(mRgba.getNativeObjAddr(),coordinate);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -123,9 +134,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
         mGray = inputFrame.gray();
-//        double[] rlt=FindMoving(mGray.getNativeObjAddr(), mRgba.getNativeObjAddr());
-//        if(rlt!=null)
-//            Log.d(TAG,"POS:"+rlt[0]+rlt[1]);
+        double[] rlt=FindMoving(mGray.getNativeObjAddr(), mRgba.getNativeObjAddr());
+        if(rlt!=null)
+            Log.d(TAG,"POS:"+rlt[0]+rlt[1]);
 
         return mRgba;
     }
