@@ -79,7 +79,7 @@ JNIEXPORT jdoubleArray JNICALL Java_com_muse_motiondetect_MainActivity_FindMovin
  * Signature: (J[D)V
  */
 JNIEXPORT void JNICALL Java_com_muse_motiondetect_MainActivity_SetColor
-  (JNIEnv *, jobject, jlong, jdoubleArray);
+  (JNIEnv *, jobject, jlong, jintArray);
 
 #ifdef __cplusplus
 }

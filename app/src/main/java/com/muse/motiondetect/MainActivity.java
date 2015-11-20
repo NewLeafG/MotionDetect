@@ -1,6 +1,7 @@
 package com.muse.motiondetect;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
+import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
-import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
+
 import java.util.List;
 import java.util.ListIterator;
 
@@ -39,7 +41,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
     private CamView mOpenCvCameraView;
 
     public native double[] FindMoving(long matAddrGr, long matAddrRgba);
-    public native void SetColor(long matAddrRgba, double[] coordinate);
+    public native void SetColor(long matAddrRgba, int[] data);
 
     public MainActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -61,8 +63,43 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                double[] coordinate = {4.2,5.3};
-                SetColor(mRgba.getNativeObjAddr(),coordinate);
+                int cols = mRgba.cols();
+                int rows = mRgba.rows();
+
+//                int xOffset = (mOpenCvCameraView.getWidth() - cols) / 2;
+//                int yOffset = (mOpenCvCameraView.getHeight() - rows) / 2;
+
+//                int x = (int)event.getX() - xOffset;
+//                int y = (int)event.getY() - yOffset;
+
+                Point startPnt = mOpenCvCameraView.getStartPoint();
+                int x = (int)event.getX() - startPnt.x;
+                int y = (int)event.getY() - startPnt.y;
+                float scale = mOpenCvCameraView.getScale();
+                if(scale!=0){
+                    x = (int)(x/scale);
+                    y = (int)(y/scale);
+                }
+
+                Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
+
+                if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
+
+                int[] data = {x,y};
+                SetColor(mRgba.getNativeObjAddr(),data);
+//                Rect touchedRect = new Rect();
+//
+//                touchedRect.x = (x>4) ? x-4 : 0;
+//                touchedRect.y = (y>4) ? y-4 : 0;
+//
+//                touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
+//                touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
+//
+//                Mat touchedRegionRgba = mRgba.submat(touchedRect);
+//
+//                Mat touchedRegionHsv = new Mat();
+//                Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
+
                 return false;
             }
         });
@@ -117,7 +154,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 
     public void onCameraViewStarted(int width, int height) {
         mResolutionList = mOpenCvCameraView.getResolutionList();
-        Camera.Size resolution = mResolutionList.get(7);
+        Camera.Size resolution = mResolutionList.get(2);
         mOpenCvCameraView.setResolution(resolution);
 
         mRgba = new Mat(height, width, CvType.CV_8UC4);
